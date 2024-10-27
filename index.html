@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BidMyHome</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <style>
+        /* Glassmorphism & Light Theme Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #ffffff, #f0f0f0);
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Header with Glassmorphism */
+        header {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            padding: 15px 30px;
+            background: rgba(255, 255, 255, 0.2); /* Light transparent background */
+            backdrop-filter: blur(15px); /* Blur effect for glassmorphism */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Soft shadow */
+            z-index: 10;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+            padding: 0;
+            margin: 0;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 10px;
+            transition: color 0.3s ease-in-out;
+        }
+
+        nav ul li a:hover {
+            color: #ff4d00; /* Accent color on hover */
+        }
+
+        .search-bar {
+            flex-grow: 1;
+            margin: 0 20px;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 20px;
+            border: none;
+            outline: none;
+            background-color: rgba(255, 255, 255, 0.4); /* Light glassy background for input */
+            color: #333;
+            backdrop-filter: blur(5px);
+        }
+
+        .auth-button .dropdown-btn {
+            padding: 10px 20px;
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.4); /* Glassmorphism for buttons */
+            border: none;
+            color: white;
+            font-weight: bold;
+            transition: background 0.3s ease-in-out;
+        }
+
+        .auth-button .dropdown-btn:hover {
+            background: rgba(255, 255, 255, 0.6);
+        }
+
+        .auth-button .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            color: #264143; /* Text color for dropdown */
+            min-width: 160px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            border-radius: 5px;
+        }
+
+        .auth-button .dropdown-content a {
+            color: #264143;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            transition: background 0.3s;
+        }
+
+        .auth-button .dropdown-content a:hover {
+            background-color: #f1f1f1; /* Change background on hover */
+        }
+
+        /* Show dropdown on hover */
+        .auth-button:hover .dropdown-content {
+            display: block;
+        }
+
+        /* Hero Section with Slideshow */
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.4);
+            color: #fff;
+        }
+
+        .slideshow {
+            position: absolute;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .slideshow img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            opacity: 0;
+            animation: slide 15s infinite;
+        }
+
+        .slideshow img.active {
+            opacity: 1;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        @keyframes slide {
+            0%,
+            33% {
+                opacity: 1;
+            }
+
+            34%,
+            100% {
+                opacity: 0;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .cta-buttons {
+            z-index: 2;
+            position: relative;
+        }
+
+        .cta-buttons button {
+            background: rgba(255, 255, 255, 0.4);
+            border: none;
+            padding: 12px 30px;
+            margin: 10px;
+            border-radius: 30px;
+            font-size: 18px;
+            color: #333;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .cta-buttons button:hover {
+            background: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Services Section */
+.service {
+    padding: 60px 0;
+    background-color: #f8f8f8;
+    text-align: center;
+}
+
+.service .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.service .section-title {
+    font-size: 32px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.service .section-subtitle {
+    font-size: 20px;
+    margin-bottom: 40px;
+    color: #777;
+}
+
+.service-list {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.service-card {
+    flex: 1 1 calc(33.333% - 20px);
+    background-color: white;
+    padding: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+    text-align: center;
+}
+
+.service-card:hover {
+    transform: translateY(-10px);
+}
+
+.card-icon {
+    margin-bottom: 20px;
+}
+
+.card-icon img {
+    width: 60px;
+    height: 60px;
+}
+
+.card-title {
+    font-size: 22px;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.card-text {
+    font-size: 16px;
+    margin-bottom: 20px;
+    color: #666;
+}
+
+.card-link {
+    text-decoration: none;
+    font-weight: bold;
+    color: #ff4d00;
+    transition: color 0.3s ease-in-out;
+}
+
+.card-link:hover {
+    color: #d63c00;
+}
+
+/* Properties Section */
+
+
+
+.section-title {
+    font-size: 32px;
+    text-align: center;
+    margin-bottom: 40px;
+    color: #333;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.col-md-4 {
+    flex: 1 1 calc(33.333% - 20px);
+}
+
+.card {
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+}
+
+.card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.card div {
+    padding: 20px;
+}
+
+.card h2 {
+    font-size: 22px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.card p {
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: #666;
+}
+
+.btn-primary {
+    background-color: #ff4d00;
+    border: none;
+    padding: 10px 20px;
+    color: white;
+    text-decoration: none;
+    border-radius: 30px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #d63c00;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .service-list, .row {
+        flex-direction: column;
+    }
+
+    .col-md-4, .service-card {
+        flex: 1 1 100%;
+    }
+}
+
+
+        /* Footer */
+        .footer {
+            margin-top: 30px;
+            width: 100%;
+            background-color: rgb(7, 7, 7);
+            height: auto;
+            padding-bottom: 20px;
+            color: white;
+            text-align: center;
+        }
+
+        .footer h4 {
+            margin-top: 20px;
+        }
+
+        .footer p {
+            margin-top: 10px;
+            font-size: small;
+        }
+
+        .footer .icons i {
+            margin-top: 10px;
+            padding-right: 10px;
+            font-size: large;
+        }
+
+        .footer .icons a {
+            text-decoration: none;
+            color: white;
+        }
+
+
+        .container {
+  background-color: #fff;
+  border: 3px solid #660033;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 0;
+  text-align: center;
+  width: 900px;
+  max-width: 100%;
+}
+
+.container p {
+  color: rgb(136, 136, 136);
+  letter-spacing: 0.4px;
+}
+
+.container form {
+  width: 100%;
+}
+
+.container .input-area {
+  position: relative;
+  margin: 10px 0;
+  height: 44px;
+  width: 100%;
+}
+
+.container .h-80 {
+  height: 80px;
+}
+
+.container input, .container textarea {
+  position: absolute;
+  display: block;
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+  padding: 12px;
+  height: 100%;
+  width: 100%;
+  border: 1px solid #999;
+  border-radius: 4px;
+  outline: none;
+  resize: none;
+}
+
+.container .sendbtn {
+  display: block;
+  width: 100%;
+  background: #660033;
+  color: #fff;
+  font-size: 18px;
+  padding: 11px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.container .sendbtn:hover {
+  background-color: #993366;
+}
+
+@media screen and (max-width: 600px) {
+  .container {
+    padding: 20px 30px;
+  }
+}
+
+.social-container {
+  position: fixed;
+  right: 0;
+  bottom: 80px;
+  transform: translateX(100%);
+  transition: transform 0.4s ease-in-out;
+  z-index: 10;
+}
+
+.social-container.visible {
+  transform: translateX(-10px);
+}
+
+.custom-social-container {  
+  background-color: #fff;
+  border-radius: 16px;
+  box-shadow: 0 16px 31px -17px rgba(248, 4, 77, 0.6);
+  border: 5px solid #660033;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: "Poppins", sans-serif;
+  position: relative;
+  height: 169px;  
+  width: 370px;
+  max-width: calc(100% - 10px);
+}
+
+.custom-social-container button.cross-btn {
+  border: 0;
+  color: #660033;
+  cursor: pointer;
+  font-size: 20px;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+
+.custom-social-container p {
+  background-color: #660033;
+  border-radius: 0 0 10px 10px;
+  color: #fff;
+  font-size: 14px;
+  line-height: 28px;
+  padding: 2px 17px 6px;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  margin: 0;
+  transform: translateX(-50%);
+  text-align: center;
+  width: 215px;
+}
+
+.custom-social-container ul {
+  display: flex;
+  list-style-type: none;
+  padding: 0;
+  margin-top: 58px;
+}
+
+.custom-social-container ul li {
+  margin: 0 10px;
+}
+
+.custom-social-container ul li a {
+  border: 1px solid #999;
+  border-radius: 50%;
+  color: #660033;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  width: 50px;
+  text-decoration: none;
+}
+
+.custom-social-container ul li a:hover {
+  border-color: #ffd791;
+  box-shadow: 0 9px 12px -9px #ffd791;
+}
+
+.connect-btn {
+  border-radius: 26.5px;
+  background-color: #660033;
+  border: 1px solid #660033;
+  box-shadow: 0 16px 22px -17px #660033;
+  color: #fff;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 20px;
+  padding: 12px 20px;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 999;
+}
+
+.connect-btn:hover {
+  background-color: #993366;
+}
+
+@media screen and (max-width: 480px) {
+
+  .social-container.visible {
+    transform: translateX(0px);
+  }
+  
+  .connect-btn {
+    right: 10px;
+  }
+}
+
+    </style>
+</head>
+
+<body>
+
+    <!-- Header with Glassmorphism -->
+    <header>
+        <div class="logo">BidMyHome</div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="aboutus.html">About Us</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="search-bar">
+            <input type="text" placeholder="Search properties...">
+        </div>
+        <div class="auth-button">
+            <!-- Single button for Login/SignUp -->
+            <a href="login.html" class="btn">Login / SignUp</a>
+        </div>
+    </header>
+    
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="slideshow">
+            <img src="luxury-property-bel-air-realtor-los-angels-la-exclusive-house-edgeless-infinity-swimming-pool-light-sykline-24.jpg" alt="Luxury Property 1" class="active">
+            <img src="wp2406659.jpg" alt="Luxury Property 2">
+            <img src="luxury-house-mgayhrm416op3g5hx6enq.jpg" alt="Luxury Property 3">
+        </div>
+        <div class="cta-buttons">
+            <button>Find Your Dream Home</button>
+            <button>Start Bidding Now</button>
+        </div>
+    </section>
+
+     <!-- Services Section -->
+     <section class="service">
+        <div class="container">
+            <h2 class="section-title">Our Services</h2>
+            <h3 class="section-subtitle">What we offer</h3>
+            <div class="service-list">
+                <div class="service-card">
+                    <div class="card-icon">
+                        <img src="home-icon.png" alt="Buy Icon">
+                    </div>
+                    <h3 class="card-title">Buy</h3>
+                    <p class="card-text">Discover the best properties available for purchase.</p>
+                    <a href="buy.html" class="card-link">Learn More</a>
+                </div>
+                <div class="service-card">
+                    <div class="card-icon">
+                        <img src="rent-icon.png" alt="Rent Icon">
+                    </div>
+                    <h3 class="card-title">Rent</h3>
+                    <p class="card-text">Find rental properties that suit your needs.</p>
+                    <a href="rent.html" class="card-link">Learn More</a>
+                </div>
+                <div class="service-card">
+                    <div class="card-icon">
+                        <img src="bidding-icon.png" alt="Bidding Icon">
+                    </div>
+                    <h3 class="card-title">Bidding</h3>
+                    <p class="card-text">Participate in exciting property bidding events.</p>
+                    <a href="Bidding.html" class="card-link">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Properties Section -->
+    <section class="container">
+        <h2 class="section-title">Featured Properties</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="property1.jpg" alt="Property 1">
+                    <div>
+                        <h2>Modern Family Home</h2>
+                        <p>Located in a serene neighborhood, this home features 4 bedrooms and a beautiful garden.</p>
+                        <p>Price: $450,000</p>
+                        <a href="#" class="btn btn-primary">View Details</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="property2.jpg" alt="Property 2">
+                    <div>
+                        <h2>Luxury Apartment</h2>
+                        <p>This stunning apartment offers breathtaking city views and modern amenities.</p>
+                        <p>Price: $850,000</p>
+                        <a href="#" class="btn btn-primary">View Details</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="property3.jpg" alt="Property 3">
+                    <div>
+                        <h2>Cozy Cottage</h2>
+                        <p>A charming cottage with 2 bedrooms, perfect for weekend getaways.</p>
+                        <p>Price: $250,000</p>
+                        <a href="#" class="btn btn-primary">View Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="container">
+        <h2>Get in touch</h2>
+        <p>
+          Feel free to contact me about anything related to Web Development.
+        </p>
+        <form class="contact-form">
+          <div class="input-area">
+            <input type="text" placeholder="Your name"/>
+          </div>
+          <div class="input-area">
+            <input type="email" placeholder="Email address" />
+          </div>
+          <div class="input-area">
+            <input type="text" placeholder="Subject">
+          </div>
+          <div class="input-area h-80">
+            <textarea placeholder="Your message"></textarea>
+          </div>
+          <button class="sendbtn">Send</button>
+        </form>
+      </div>
+      <div class="social-container">
+        <div class="custom-social-container">
+          <p>Contact me on</p>
+          <button class="cross-btn"><i class="fas fa-times"></i></button>
+          <ul>
+            <li>
+              <a href="https://instagram.com/codewithfaraz" target="_blank" rel="nofollow">
+                <i class="fab fa-instagram"></i>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.youtube.com/@codewithfaraz" target="_blank" rel="nofollow">
+                <i class="fab fa-youtube"></i>
+              </a>
+            </li>
+            <li>
+              <a href="https://facebook.com/codewithfaraz" target="_blank" rel="nofollow">
+                <i class="fab fa-facebook"></i>
+              </a>
+            </li>
+            <li>
+              <a href="https://twitter.com/codewithfaraz" target="_blank" rel="nofollow">
+                <i class="fab fa-twitter"></i>
+              </a>
+            </li>
+            <li>
+              <a href="https://linkedin.com/in/farazc60" target="_blank" rel="nofollow">
+                <i class="fab fa-linkedin"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <button class="connect-btn">
+        Get Connected
+      </button>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <h4>BidMyHome</h4>
+        <p>Connect with us on social media!</p>
+        <div class="icons">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+        <p>&copy; 2024 BidMyHome. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Slideshow Functionality
+        const slides = document.querySelectorAll('.slideshow img');
+        let currentSlide = 0;
+
+        function showSlide(index) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (index + slides.length) % slides.length; // Loop back
+            slides[currentSlide].classList.add('active');
+        }
+
+        setInterval(() => {
+            showSlide(currentSlide + 1);
+        }, 5000); // Change slide every 5 seconds
+
+        const contactform = document.querySelector('.contact-form');
+const container = document.querySelector('.container');
+
+contactform.addEventListener('submit', (event) => {
+  event.preventDefault();
+  container.innerHTML = '<p>Thanks for your message. <br /> I\'ll respond to you shortly</p>';
+});
+
+const connectbtn = document.querySelector('.connect-btn');
+const crossbtn = document.querySelector('.cross-btn');
+const socialcontainer = document.querySelector('.social-container');
+
+connectbtn.addEventListener('click', () => {
+  socialcontainer.classList.toggle('visible')
+});
+
+crossbtn.addEventListener('click', () => {
+  socialcontainer.classList.remove('visible')
+});
+
+    </script>
+</body>
+
+</html>
