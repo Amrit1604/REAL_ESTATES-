@@ -227,71 +227,104 @@
 
 
         /* Header with Glassmorphism */
-        header {
-            position: absolute;
-            top: 0;
-            width: 100%;
-            padding: 15px 30px;
-            background: rgba(255, 255, 255, 0.2); /* Light transparent background */
-            backdrop-filter: blur(15px); /* Blur effect for glassmorphism */
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Soft shadow */
-            z-index: 10;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: white;
-        }
+       /* Base Styles - Desktop */
+header {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    padding: 15px 30px;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(15px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+}
 
-        nav ul {
-            list-style: none;
-            display: flex;
-            gap: 20px;
-            padding: 0;
-            margin: 0;
-        }
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    padding: 0;
+    margin: 0;
+}
 
-        nav ul li a {
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-            padding: 10px;
-            transition: color 0.3s ease-in-out;
-        }
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 10px;
+    transition: color 0.3s ease-in-out;
+}
 
-        nav ul li a:hover {
-            color: #ff4d00; /* Accent color on hover */
-        }
+nav ul li a:hover {
+    color: #ff4d00;
+}
 
-        .search-bar {
-            flex-grow: 1;
-            margin: 0 20px;
-        }
+.search-bar {
+    flex-grow: 1;
+    margin: 0 20px;
+}
 
-        .search-bar input {
-            width: 100%;
-            padding: 10px;
-            border-radius: 20px;
-            border: none;
-            outline: none;
-            background-color: rgba(255, 255, 255, 0.4); /* Light glassy background for input */
-            color: #333;
-            backdrop-filter: blur(5px);
-        }
+.search-bar input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 20px;
+    border: none;
+    outline: none;
+    background-color: rgba(255, 255, 255, 0.4);
+    color: #333;
+    backdrop-filter: blur(5px);
+}
 
-        .auth-button .dropdown-btn {
-            padding: 10px 20px;
-            border-radius: 30px;
-            background: rgba(255, 255, 255, 0.4); /* Glassmorphism for buttons */
-            border: none;
-            color: white;
-            font-weight: bold;
-            transition: background 0.3s ease-in-out;
-        }
+.auth-button .dropdown-btn {
+    padding: 10px 20px;
+    border-radius: 30px;
+    background: rgba(255, 255, 255, 0.4);
+    border: none;
+    color: white;
+    font-weight: bold;
+    transition: background 0.3s ease-in-out;
+}
 
-        .auth-button .dropdown-btn:hover {
-            background: rgba(255, 255, 255, 0.6);
-        }
+.auth-button .dropdown-btn:hover {
+    background: rgba(255, 255, 255, 0.6);
+}
 
+/* Responsive Styles - iPhone 14 and similar screen sizes */
+@media (max-width: 430px) {
+    header {
+        padding: 10px 20px;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    nav ul {
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+    }
+
+    .search-bar {
+        width: 100%;
+        margin: 10px 0;
+    }
+
+    .search-bar input {
+        width: 100%;
+        padding: 8px;
+    }
+
+    .auth-button .dropdown-btn {
+        padding: 8px 16px;
+        width: 100%;
+        text-align: center;
+    }
+}
+
+  
         /* Hero Section with Slideshow */
         .hero {
             position: relative;
@@ -604,12 +637,13 @@
         <div class="search-bar">
             <input type="text" placeholder="Search for properties...">
         </div>
-        <a href="login.html">
+       
         <div class="auth-button">
-            
-            <button class="dropdown-btn">Login / Register</button> 
+            <a href="login.html">
+            <button class="dropdown-btn">Login / Register</button>
+        </a>
         </div>
-                <\a>
+  
     </header>
 
     <div class="hero">
